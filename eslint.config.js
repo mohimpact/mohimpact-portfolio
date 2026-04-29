@@ -14,7 +14,7 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 'latest',
       globals: globals.browser,
       parserOptions: {
         ecmaVersion: 'latest',
@@ -22,8 +22,13 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
+
+    // ✅ CORRECT POSITION
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]|motion' }],
+      'no-console': 'warn',
+      'eqeqeq': 'error',
+      'prefer-const': 'warn',
     },
   },
 ])

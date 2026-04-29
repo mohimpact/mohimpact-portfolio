@@ -1,7 +1,5 @@
 import React from "react";
-// We removed Footer import because we embedded a minimal footer in Contact for a seamless look
-// But we should check if the original Footer.jsx file exists and maybe delete it or keep it unused.
-// For now, let's keep App.jsx clean.
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -9,18 +7,35 @@ import Stats from "./components/Stats";
 import Projects from "./components/Projects";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import FintechAnalytics from "./pages/FintechAnalytics"; // Our new page
+
+// This component holds your "Single Page" portfolio content
+const Home = () => (
+    <>
+        <Hero />
+        <Stats />
+        <Projects />
+        <About />
+        <Contact />
+    </>
+);
 
 function App() {
-  return (
-    <div className="min-h-screen bg-background font-sans text-navy-900 selection:bg-primary selection:text-white">
-      <Navbar />
-      <Hero />
-      <Stats />
-      <Projects />
-      <About />
-      <Contact />
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <div className="min-h-screen bg-background font-sans text-navy-900 selection:bg-primary selection:text-white">
+                <Navbar />
+
+                <Routes>
+                    {/* Main Portfolio Page */}
+                    <Route path="/" element={<Home />} />
+
+                    {/* Deep Dive Page */}
+                    <Route path="/fintech-analytics" element={<FintechAnalytics />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

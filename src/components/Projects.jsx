@@ -1,8 +1,45 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, ExternalLink, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const projects = [
+  {
+    title: "Fintech Behavior Analytics",
+    description:
+      "End-to-end data pipeline analyzing user retention and transaction patterns. Optimized storage with Parquet and automated workflows using Airflow to identify 15% drop-off in KYC stages.",
+    tags: ["Python", "Airflow", "PostgreSQL", "Parquet"],
+    image: "/project-fintech.png",
+    accent: "text-indigo-600 dark:text-indigo-400",
+    links: {
+      github: "https://github.com/mohimpact/fintech-behavior-analytics",
+      demo: "/fintech-analytics", // Internal Route
+    },
+  },
+  {
+    title: "Cloud Sales Dashboard",
+    description:
+      "Integrated AWS S3 with a data pipeline to automate sales reporting. Developed Python scripts for seamless cloud uploads and real-time data synchronization.",
+    tags: ["AWS S3", "Python", "Cloud Computing"],
+    image: "/project-cloud.png",
+    accent: "text-cyan-600 dark:text-cyan-400",
+    links: {
+      github: "https://github.com/mohimpact/cloud-sales-dashboard",
+      demo: "#",
+    },
+  },
+  {
+    title: "West Africa Health Analysis",
+    description:
+      "A deep-dive into health inequalities across Nigeria, Liberia, Togo, and Cabo Verde using WHO datasets. Focused on socio-economic disparities and healthcare access.",
+    tags: ["SQL", "Data Cleaning", "Health Informatics"],
+    image: "/project-who.png",
+    accent: "text-red-600 dark:text-red-400",
+    links: {
+      github: "https://github.com/mohimpact/West-Africa-Health-Analysis",
+      demo: "#",
+    },
+  },
   {
     title: "OPay Personal Finance Tracker",
     description:
@@ -104,14 +141,25 @@ const Projects = () => {
                     <Github size={24} />
                   </a>
                   {project.links.demo !== "#" && (
-                    <a
-                      href={project.links.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 bg-background rounded-full text-foreground hover:text-primary shadow-xl hover:scale-110 transition-all border border-border"
-                    >
-                      <ExternalLink size={24} />
-                    </a>
+                    <>
+                      {project.links.demo.startsWith("/") ? (
+                        <Link
+                          to={project.links.demo}
+                          className="p-3 bg-background rounded-full text-foreground hover:text-primary shadow-xl hover:scale-110 transition-all border border-border"
+                        >
+                          <ExternalLink size={24} />
+                        </Link>
+                      ) : (
+                        <a
+                          href={project.links.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 bg-background rounded-full text-foreground hover:text-primary shadow-xl hover:scale-110 transition-all border border-border"
+                        >
+                          <ExternalLink size={24} />
+                        </a>
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -139,14 +187,25 @@ const Projects = () => {
                 <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
                   {project.description}
                 </p>
-                <a
-                  href={project.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto"
-                >
-                  View Case Study <ArrowRight size={16} />
-                </a>
+
+                {/* Dynamic Link Logic */}
+                {project.links.demo.startsWith("/") ? (
+                  <Link
+                    to={project.links.demo}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto"
+                  >
+                    View Case Study <ArrowRight size={16} />
+                  </Link>
+                ) : (
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto"
+                  >
+                    View Code <ArrowRight size={16} />
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}
