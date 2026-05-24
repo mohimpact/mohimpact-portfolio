@@ -13,7 +13,7 @@ const projects = [
     accent: "text-indigo-600 dark:text-indigo-400",
     links: {
       github: "https://github.com/mohimpact/fintech-behavior-analytics",
-      demo: "/fintech-analytics", // Internal Route
+      demo: "https://www.loom.com/share/eba45beae28242ec9181f932a41ba3c4",
     },
   },
   {
@@ -25,7 +25,7 @@ const projects = [
     accent: "text-cyan-600 dark:text-cyan-400",
     links: {
       github: "https://github.com/mohimpact/cloud-sales-dashboard",
-      demo: "#",
+      demo: "https://www.loom.com/share/692a31c657d840feb1d5baa250831d9f",
     },
   },
   {
@@ -37,7 +37,7 @@ const projects = [
     accent: "text-red-600 dark:text-red-400",
     links: {
       github: "https://github.com/mohimpact/West-Africa-Health-Analysis",
-      demo: "#",
+      demo: "https://www.loom.com/share/816914b9e355464bbb4c74604f53eaa9",
     },
   },
   {
@@ -189,13 +189,24 @@ const Projects = () => {
                 </p>
 
                 {/* Dynamic Link Logic */}
-                {project.links.demo.startsWith("/") ? (
-                  <Link
-                    to={project.links.demo}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto"
-                  >
-                    View Case Study <ArrowRight size={16} />
-                  </Link>
+                {project.links.demo !== "#" ? (
+                  project.links.demo.startsWith("/") ? (
+                    <Link
+                      to={project.links.demo}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto"
+                    >
+                      View Case Study <ArrowRight size={16} />
+                    </Link>
+                  ) : (
+                    <a
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto"
+                    >
+                      Watch Demo <ArrowRight size={16} />
+                    </a>
+                  )
                 ) : (
                   <a
                     href={project.links.github}
